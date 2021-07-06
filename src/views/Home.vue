@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="container">
+    <div class="overlay"></div>
+
+    <h1 class="text-center pt-5">Explore Weather Data Around The Wrold!</h1>
+
+    <div class="spacer my-5"></div>
+
+    <div class="map__container">
+      <the-modal :weatherData="weatherData"></the-modal>
+      <world-map @show-popup="showPopup"> </world-map>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import WorldMap from "@/components/WorldMap";
+import TheModal from "@/components/TheModal";
 
 export default {
-  name: "Home",
-  components: {
-    HelloWorld,
+  components: { WorldMap, TheModal },
+  data() {
+    return {
+      weatherData: {},
+    };
+  },
+  methods: {
+    showPopup(data) {
+      this.weatherData = data;
+      this.toggleModal();
+    },
   },
 };
 </script>
+
