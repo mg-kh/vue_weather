@@ -12,6 +12,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "@/assets/style/style.scss";
 
+document.title = "Weather App";
+
 API_SERVICES.init();
 Vue.use(HighchartsVue);
 Vue.use(BootstrapVue);
