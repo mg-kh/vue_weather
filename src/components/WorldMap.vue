@@ -90,7 +90,8 @@ export default {
         e.target.style.cursor = "pointer";
       } catch (error) {
         var { message } = error.response.data;
-        console.log(message);
+        e.target.style.cursor = "pointer";
+        alert(message);
       }
     },
   },
