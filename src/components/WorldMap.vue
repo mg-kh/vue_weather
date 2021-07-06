@@ -26,15 +26,6 @@ export default {
           map: mapData,
           backgroundColor: "transparent",
         },
-        responsive: {
-          rules: [
-            {
-              condition: {
-                //
-              },
-            },
-          ],
-        },
         title: {
           text: "",
         },
@@ -65,7 +56,6 @@ export default {
           {
             type: "map",
             nullInteraction: true,
-            color: "#ff0000",
             states: {
               hover: {
                 color: "#0d6efd40",
@@ -79,7 +69,7 @@ export default {
             events: {
               click: (e) => {
                 const country = e.point.name;
-                this.fetchWeatherData(country);
+                this.fetchWeatherData(country, e);
               },
             },
           },
@@ -89,13 +79,15 @@ export default {
     };
   },
   methods: {
-    async fetchWeatherData(country) {
+    async fetchWeatherData(country, e) {
       this.loadingModal = true;
+      e.target.style.cursor = "wait";
       try {
         const { data } = await weather.get(country);
         this.loadingModal = false;
         this.weatherData = data;
         this.$emit("show-popup", data);
+        e.target.style.cursor = "pointer";
       } catch (error) {
         var { message } = error.response.data;
         console.log(message);
